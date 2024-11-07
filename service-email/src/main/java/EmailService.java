@@ -1,7 +1,6 @@
-package br.com.consumers;
-
-import br.com.kafka.KafkaService;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
+
+import java.util.Map;
 
 public class EmailService {
 
@@ -10,12 +9,14 @@ public class EmailService {
         var kafkaService = new KafkaService(
             EmailService.class.getSimpleName(),
             "ECOMMERCE_SEND_EMAIL",
-            emailService::parse
+            emailService::parse,
+            Email.class,
+            Map.of()
         );
         kafkaService.run();
     }
 
-    private void parse(ConsumerRecord<String, String> record) throws InterruptedException {
+    private void parse(ConsumerRecord<String, Email> record) throws InterruptedException {
         System.out.println("----------------------");
         System.out.println("Sending email.");
         System.out.println(record.key());

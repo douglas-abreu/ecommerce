@@ -1,5 +1,3 @@
-package br.com.entity;
-
 import java.math.BigDecimal;
 
 public class Order {
