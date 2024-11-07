@@ -9,7 +9,6 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <modules>
-        <module>commom-kafka</module>
         <module>kafka-commom</module>
         <module>service-fraud-detector</module>
         <module>service-email</module>
