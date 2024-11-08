@@ -8,6 +8,7 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.Properties;
 import java.util.UUID;
+import java.util.concurrent.ExecutionException;
 import java.util.regex.Pattern;
 
 public class KafkaService<T> implements Closeable {
@@ -53,7 +54,7 @@ public class KafkaService<T> implements Closeable {
         return properties;
     }
 
-    public void run() throws InterruptedException {
+    public void run() throws InterruptedException, ExecutionException {
         while(true) {
             var records = consumer.poll(Duration.ofMillis(100));
             if(!records.isEmpty()) {
