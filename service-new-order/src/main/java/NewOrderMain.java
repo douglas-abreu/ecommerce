@@ -11,7 +11,8 @@ public class NewOrderMain {
             var orderID = UUID.randomUUID().toString();
             var userID = UUID.randomUUID().toString();
             var amount = BigDecimal.valueOf(Math.random() * 5000 + 1);
-            var order = new Order(userID, orderID, amount);
+            var orderEmail = "0.09179175671123674@gmail.com";
+            var order = new Order(userID, orderID, amount, orderEmail);
             var subject = "Thanks for your pruchase, processing email";
             var body = "Your orden has been processed successfully.";
             var email = new Email(subject, body);

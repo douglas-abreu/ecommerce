@@ -54,12 +54,16 @@ public class KafkaService<T> implements Closeable {
         return properties;
     }
 
-    public void run() throws InterruptedException, ExecutionException {
+    public void run() throws Exception {
         while(true) {
             var records = consumer.poll(Duration.ofMillis(100));
             if(!records.isEmpty()) {
                 for (var record : records) {
-                    parse.consume(record);
+                    try {
+                        parse.consume(record);
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
                 }
             }
         }

@@ -9,7 +9,7 @@ public class FraudDetectorService {
     public static void main(String[] args) throws InterruptedException {
         try{
             var fraudService = new FraudDetectorService();
-            var kafkaService = new KafkaService<Order>(
+            var kafkaService = new KafkaService<>(
                     FraudDetectorService.class.getSimpleName(),
                     "ECOMMERCE_NEW_ORDER",
                     fraudService::parse,
@@ -17,7 +17,7 @@ public class FraudDetectorService {
                     Map.of()
             );
             kafkaService.run();
-        } catch (RuntimeException | ExecutionException e) {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
