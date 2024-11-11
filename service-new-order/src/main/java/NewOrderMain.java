@@ -12,12 +12,12 @@ public class NewOrderMain {
             var userID = UUID.randomUUID().toString();
             var amount = BigDecimal.valueOf(Math.random() * 5000 + 1);
             var orderEmail = "0.09179175671123674@gmail.com";
-            var order = new Order(userID, orderID, amount, orderEmail);
+            var order = new Order(userID, amount, orderEmail);
             var subject = "Thanks for your pruchase, processing email";
             var body = "Your orden has been processed successfully.";
             var email = new Email(subject, body);
-            orderDispatcher.send("ECOMMERCE_NEW_ORDER", userID, order);
-            emailDispatcher.send("ECOMMERCE_SEND_EMAIL", userID, email);
+            orderDispatcher.send("ECOMMERCE_NEW_ORDER", orderEmail, order);
+            emailDispatcher.send("ECOMMERCE_SEND_EMAIL", orderEmail, email);
         } catch (ExecutionException | InterruptedException e) {
             throw new RuntimeException(e);
         }

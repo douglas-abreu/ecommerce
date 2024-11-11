@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Map;
+import java.util.UUID;
 
 public class CreateUserService {
 
@@ -41,15 +42,15 @@ public class CreateUserService {
         System.out.println(order);
         Thread.sleep(1000);
         if(isNewUser(order.getEmail())){
-            createNewUser(order.getUserId(), order.getEmail());
+            createNewUser(order.getEmail());
         }
 
     }
 
-    private void createNewUser(String uuid, String email) throws SQLException {
+    private void createNewUser(String email) throws SQLException {
         var insertion = connection.prepareStatement("insert into Users (uuid, email) " +
                 "values (?,?)");
-        insertion.setString(1, uuid);
+        insertion.setString(1, UUID.randomUUID().toString());
         insertion.setString(2, email);
         insertion.execute();
         System.out.println("New user created with email: " + email);
